@@ -17,12 +17,22 @@ protocol ProductsScreenPresenterProtocol: AnyObject {
     var product: Data? { get set }
     func viewDidLoad()
     func getProduct(categoryId: String?, sortBy: String?, sortType: String?, limit: String?, offset: String?)
+    func paginationActive()
 }
 
 class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
     func viewDidLoad() {
-        getProduct(categoryId: nil, sortBy: "price", sortType: nil, limit: nil, offset: nil)
+        getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: nil)
     }
+    
+    var changesToTheRequest = false
+    
+    func paginationActive(){
+        
+        getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: String(product?.items?.count ?? 0))
+        
+    }
+    
     
     var product: Data?
     var router: RouterProtocol
@@ -51,29 +61,38 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
                 sortType = "desc"
            }
            if limit == "" {
-                limit = "40"
+                limit = "10"
            }
            if offset == "" {
                 offset = "0"
            }
            
-           
+       
            
            NetworkService.shared.getTheFood(categoryId: categoryId, sortBy: sortBy, sortType: sortType, limit: limit, offset: offset) { response in
 //               print(response)
+//               print()
                if (response != nil) {
-                   
-//                   if self.product == nil {
-                   self.product = response
-//                   } else {
-//                       self.product!.items = self.product!.items + response!.items
-//                   }
+                   if self.changesToTheRequest == true && self.product == nil {
+                       self.product = response
+                   }
+                   if self.product == nil {
+                       self.product = response
+                   } else if self.changesToTheRequest == false {
+                       self.product!.items = self.product!.items! + response!.items!
+                   } else {
+                       self.product = response
+                   }
                    self.view?.success()
+                   print("ne пусто")
                } else {
                    self.view?.failure()
                    print("пусто")
                }
            }
-       }
-    
+
+    }
 }
+
+//
+
