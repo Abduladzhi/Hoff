@@ -25,6 +25,7 @@
 		9801B99627FE313100C84C61 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9801B99527FE313100C84C61 /* Network.swift */; };
 		9801B99A27FE374100C84C61 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9801B99827FE374100C84C61 /* ProductCollectionViewCell.swift */; };
 		9801B99B27FE374100C84C61 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9801B99927FE374100C84C61 /* ProductCollectionViewCell.xib */; };
+		986FD6B02800F00D00EE5711 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 986FD6AF2800F00D00EE5711 /* Cosmos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				986FD6B02800F00D00EE5711 /* Cosmos in Frameworks */,
 				9801B99327FE30E700C84C61 /* SDWebImage in Frameworks */,
 				9801B99027FE30A300C84C61 /* Alamofire in Frameworks */,
 			);
@@ -200,6 +202,7 @@
 			packageProductDependencies = (
 				9801B98F27FE30A300C84C61 /* Alamofire */,
 				9801B99227FE30E700C84C61 /* SDWebImage */,
+				986FD6AF2800F00D00EE5711 /* Cosmos */,
 			);
 			productName = "Hoff-MVP";
 			productReference = 9801B95A27FE176900C84C61 /* Hoff-MVP.app */;
@@ -232,6 +235,7 @@
 			packageReferences = (
 				9801B98E27FE30A300C84C61 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				9801B99127FE30E700C84C61 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				986FD6AE2800F00D00EE5711 /* XCRemoteSwiftPackageReference "Cosmos" */,
 			);
 			productRefGroup = 9801B95B27FE176900C84C61 /* Products */;
 			projectDirPath = "";
@@ -510,6 +514,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		986FD6AE2800F00D00EE5711 /* XCRemoteSwiftPackageReference "Cosmos" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/Cosmos";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -522,6 +534,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9801B99127FE30E700C84C61 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		986FD6AF2800F00D00EE5711 /* Cosmos */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 986FD6AE2800F00D00EE5711 /* XCRemoteSwiftPackageReference "Cosmos" */;
+			productName = Cosmos;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

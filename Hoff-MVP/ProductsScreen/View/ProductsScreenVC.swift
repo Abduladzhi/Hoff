@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Cosmos
 
 class ProductsScreenVC: UIViewController {
     var buttonSortIsHidden = true
@@ -32,6 +33,7 @@ class ProductsScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        
         
         productCollectionView.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductCollectionViewCell")
         view.addSubview(tableList)
@@ -105,9 +107,7 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         cell.image.sd_setImage(with: URL(string: myString))
         cell.nameLabel.text = item?.name
         cell.blackFRD.text = item?.tag?[0].text ?? ""
-        cell.com.text = item?.numberOfReviews
         cell.count.text = item?.statusText
-        
         let newPrice = "\(item?.prices.new ?? 0)"
         let oldPrice = "\(item?.prices.old ?? 0)"
         
@@ -116,6 +116,9 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
                                      value: NSUnderlineStyle.single.rawValue,
                                      range: NSMakeRange(0, attributeString.length))
         
+        cell.setCosmosView(cell: cell)
+        cell.cosmosView.rating = item?.rating ?? 0.0
+        cell.cosmosView.text = item?.numberOfReviews
         if item?.prices.new == item?.prices.old {
             cell.newLabel.text = newPrice + "₽"
             cell.oldLabel.isHidden = true
@@ -142,54 +145,52 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func oneHidden() {
+        buttonSortIsHidden = !buttonSortIsHidden
+        tableList.isHidden = buttonSortIsHidden
+    }
     
+    func secondHidden() {
+        buttonSortIsHidden = !buttonSortIsHidden
+        tableList.isHidden = buttonSortIsHidden
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
             presenter.getProduct(categoryId: nil, sortBy: "price", sortType: "asc", limit: nil, offset: nil)
             if buttonSortIsHidden {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                oneHidden()
             } else {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                secondHidden()
             }
         case 1:
             presenter.getProduct(categoryId: nil, sortBy: "price", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                oneHidden()
             } else {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                secondHidden()
             }
         case 2:
             presenter.getProduct(categoryId: nil, sortBy: "popular", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                oneHidden()
             } else {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                secondHidden()
             }
         case 3:
             presenter.getProduct(categoryId: nil, sortBy: "discount", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                oneHidden()
             } else {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                secondHidden()
             }
         default:
             presenter.getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: nil)
             if buttonSortIsHidden {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                oneHidden()
             } else {
-                buttonSortIsHidden = !buttonSortIsHidden
-                tableList.isHidden = buttonSortIsHidden
+                secondHidden()
             }
         }
         

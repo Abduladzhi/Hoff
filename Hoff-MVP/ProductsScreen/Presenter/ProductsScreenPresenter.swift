@@ -32,7 +32,7 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
         getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: String(product?.items?.count ?? 0))
         
     }
-    
+
     
     var product: Data?
     var router: RouterProtocol
@@ -70,8 +70,6 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
        
            
            NetworkService.shared.getTheFood(categoryId: categoryId, sortBy: sortBy, sortType: sortType, limit: limit, offset: offset) { response in
-//               print(response)
-//               print()
                if (response != nil) {
                    if self.changesToTheRequest == true && self.product == nil {
                        self.product = response
