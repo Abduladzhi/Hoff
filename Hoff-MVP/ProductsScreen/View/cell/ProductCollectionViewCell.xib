@@ -97,6 +97,7 @@
             <size key="customSize" width="212" height="295"/>
             <connections>
                 <outlet property="blackFRD" destination="Xdc-HN-vrR" id="iox-5K-Xzh"/>
+                <outlet property="buttonFavorite" destination="SNB-GO-OkE" id="aEv-nC-6pv"/>
                 <outlet property="count" destination="ypD-XO-CcN" id="q47-QW-hYM"/>
                 <outlet property="discountLabel" destination="mqs-75-WdB" id="5fr-bM-2KQ"/>
                 <outlet property="image" destination="dRU-Z2-5Kh" id="mWY-sQ-8FX"/>

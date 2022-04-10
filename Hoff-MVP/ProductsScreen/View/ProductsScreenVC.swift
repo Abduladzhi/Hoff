@@ -20,6 +20,8 @@ class ProductsScreenVC: UIViewController {
         tableView.isHidden = true
         return tableView
     }()
+    
+    
     let buttons = [ProductSort.cheapFirst.rawValue, ProductSort.dearOnesАirst.rawValue, ProductSort.popular.rawValue, ProductSort.byDiscount.rawValue] as [Any]
     
     enum ProductSort: String, CaseIterable {
@@ -34,18 +36,12 @@ class ProductsScreenVC: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         
-        
         productCollectionView.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductCollectionViewCell")
         view.addSubview(tableList)
         
-        
-        //        tableList.isHidden = buttonSortIsHidden
         tableList.delegate = self
         tableList.dataSource = self
     }
-    
-    
-    
     
     @IBAction func pressLeftButton(_ sender: Any) {
         
@@ -57,8 +53,6 @@ class ProductsScreenVC: UIViewController {
             tableList.isHidden = buttonSortIsHidden
         }
     }
-    
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -88,7 +82,6 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
                 print("END")
             presenter.paginationActive()
                 print( indexPath.row)
-    //            collectionView.contentInset.bottom = 140.0
             }
         }
     
@@ -119,6 +112,11 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         cell.setCosmosView(cell: cell)
         cell.cosmosView.rating = item?.rating ?? 0.0
         cell.cosmosView.text = item?.numberOfReviews
+        if item?.isFavorite == true {
+            cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart.fill")
+        } else {
+            cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart")
+        }
         if item?.prices.new == item?.prices.old {
             cell.newLabel.text = newPrice + "₽"
             cell.oldLabel.isHidden = true
@@ -128,9 +126,6 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
         return cell
     }
-    
-    
-    
 }
 
 extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
@@ -205,6 +200,5 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
                 secondHidden()
             }
         }
-        
     }
 }

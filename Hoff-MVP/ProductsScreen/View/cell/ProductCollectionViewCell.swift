@@ -16,6 +16,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var oldLabel: UILabel!
     @IBOutlet weak var blackFRD: UILabel!
     @IBOutlet weak var count: UILabel!
+    @IBOutlet weak var buttonFavorite: UIButton!
     
     lazy var cosmosView: CosmosView = {
        var cosmos = CosmosView()
@@ -24,7 +25,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         cosmos.translatesAutoresizingMaskIntoConstraints = false
         return cosmos
     }()
+  
     
+
     func setCosmosView(cell: ProductCollectionViewCell) {
         cell.addSubview(cosmosView)
         NSLayoutConstraint.activate([
