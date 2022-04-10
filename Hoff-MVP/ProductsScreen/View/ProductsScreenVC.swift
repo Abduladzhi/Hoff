@@ -158,13 +158,19 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
+//            productCollectionView.reloadData()
+            presenter.product?.items = []
+            productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: "price", sortType: "asc", limit: nil, offset: nil)
+//            productCollectionView.reloadData()
             if buttonSortIsHidden {
                 oneHidden()
             } else {
                 secondHidden()
             }
         case 1:
+            presenter.product?.items = []
+            productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: "price", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
                 oneHidden()
@@ -172,6 +178,8 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
                 secondHidden()
             }
         case 2:
+            presenter.product?.items = []
+            productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: "popular", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
                 oneHidden()
@@ -179,6 +187,8 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
                 secondHidden()
             }
         case 3:
+            presenter.product?.items = []
+            productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: "discount", sortType: "desc", limit: nil, offset: nil)
             if buttonSortIsHidden {
                 oneHidden()
@@ -186,6 +196,8 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
                 secondHidden()
             }
         default:
+            presenter.product?.items = []
+            productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: nil)
             if buttonSortIsHidden {
                 oneHidden()
