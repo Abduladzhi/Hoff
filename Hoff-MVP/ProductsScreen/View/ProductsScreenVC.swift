@@ -24,18 +24,27 @@ class ProductsScreenVC: UIViewController {
     
     let buttons = [ProductSort.cheapFirst.rawValue, ProductSort.dearOnesАirst.rawValue, ProductSort.popular.rawValue, ProductSort.byDiscount.rawValue] as [Any]
     
+    let buttonCollections = [FilderProduct.cornerTkan, FilderProduct.pramieLisher, FilderProduct.cornerLither] as [Any]
+    
     enum ProductSort: String, CaseIterable {
         case cheapFirst = "Сначала дешевые"
         case dearOnesАirst = "Сначала дорогие"
         case popular = "Популярные товары"
         case byDiscount = "По скидкам"
     }
+    enum FilderProduct: String, CaseIterable {
+        case cornerTkan = "Угловые тканевые"
+        case pramieLisher = "Прямые кожанные"
+        case cornerLither = "Угловые кожанные"
+    }
+    
+    @IBOutlet weak var buttonCollectionView: UICollectionView!
     
     @IBOutlet weak var productCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        
+        buttonCollectionView.register(UINib(nibName: "ButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ButtonCollectionViewCell")
         productCollectionView.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductCollectionViewCell")
         view.addSubview(tableList)
         
@@ -86,45 +95,57 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.product?.items?.count ?? 0
+        if collectionView == self.productCollectionView {
+            return presenter.product?.items?.count ?? 0
+        } else {
+            return buttonCollections.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell)!
-        let item = presenter.product?.items![indexPath.row]
-        var myString = item?.image ?? ""
-        let ix = myString.startIndex
-        let ix2 = myString.index(ix, offsetBy: 8)
-        let ix3 = myString.index(ix, offsetBy: 16)
-        myString.removeSubrange(ix2...ix3)
-        cell.image.sd_setImage(with: URL(string: myString))
-        cell.nameLabel.text = item?.name
-        cell.blackFRD.text = item?.tag?[0].text ?? ""
-        cell.count.text = item?.statusText
-        let newPrice = "\(item?.prices.new ?? 0)"
-        let oldPrice = "\(item?.prices.old ?? 0)"
-        
-        let attributeString =  NSMutableAttributedString(string: "\(oldPrice) ₽")
-        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
-                                     value: NSUnderlineStyle.single.rawValue,
-                                     range: NSMakeRange(0, attributeString.length))
-        
-        cell.setCosmosView(cell: cell)
-        cell.cosmosView.rating = item?.rating ?? 0.0
-        cell.cosmosView.text = item?.numberOfReviews
-        if item?.isFavorite == true {
-            cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart.fill")
+        if collectionView == self.productCollectionView {
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell)!
+            let item = presenter.product?.items![indexPath.row]
+            var myString = item?.image ?? ""
+            let ix = myString.startIndex
+            let ix2 = myString.index(ix, offsetBy: 8)
+            let ix3 = myString.index(ix, offsetBy: 16)
+            myString.removeSubrange(ix2...ix3)
+            cell.image.sd_setImage(with: URL(string: myString))
+            cell.nameLabel.text = item?.name
+            cell.blackFRD.text = item?.tag?[0].text ?? ""
+            cell.count.text = item?.statusText
+            let newPrice = "\(item?.prices.new ?? 0)"
+            let oldPrice = "\(item?.prices.old ?? 0)"
+            
+            let attributeString =  NSMutableAttributedString(string: "\(oldPrice) ₽")
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
+                                         value: NSUnderlineStyle.single.rawValue,
+                                         range: NSMakeRange(0, attributeString.length))
+            
+            cell.setCosmosView(cell: cell)
+            cell.cosmosView.rating = item?.rating ?? 0.0
+            cell.cosmosView.text = item?.numberOfReviews
+            if item?.isFavorite == true {
+                cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart.fill")
+            } else {
+                cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart")
+            }
+            if item?.prices.new == item?.prices.old {
+                cell.newLabel.text = newPrice + "₽"
+                cell.oldLabel.isHidden = true
+            } else {
+                cell.newLabel.text = newPrice + "₽"
+                cell.oldLabel.attributedText = attributeString
+            }
+            return cell
         } else {
-            cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart")
+            let cellTwo = (collectionView.dequeueReusableCell(withReuseIdentifier: "ButtonCollectionViewCell", for: indexPath) as? ButtonCollectionViewCell)!
+            cellTwo.backgroundColor = .gray
+            let names = buttonCollections[indexPath.row]
+            cellTwo.buttonOutlet.setTitle("\(names)", for: .normal)
+            return cellTwo
         }
-        if item?.prices.new == item?.prices.old {
-            cell.newLabel.text = newPrice + "₽"
-            cell.oldLabel.isHidden = true
-        } else {
-            cell.newLabel.text = newPrice + "₽"
-            cell.oldLabel.attributedText = attributeString
-        }
-        return cell
     }
 }
 
@@ -153,11 +174,9 @@ extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-//            productCollectionView.reloadData()
             presenter.product?.items = []
             productCollectionView.reloadData()
             presenter.getProduct(categoryId: nil, sortBy: "price", sortType: "asc", limit: nil, offset: nil)
-//            productCollectionView.reloadData()
             if buttonSortIsHidden {
                 oneHidden()
             } else {
