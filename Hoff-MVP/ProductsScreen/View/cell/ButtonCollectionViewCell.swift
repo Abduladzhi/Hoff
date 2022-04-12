@@ -8,11 +8,13 @@
 import UIKit
 
 class ButtonCollectionViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var buttonOutlet: UIButton!
-
     
-
+    static let identifier = String(describing: ButtonCollectionViewCell.self)
+    
+    @IBOutlet weak var buttonOutlet: UIButton!
+    
+    
     @IBAction func buttonPressFL(_ sender: Any) {
+        
     }
 }

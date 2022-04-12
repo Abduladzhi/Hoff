@@ -39,6 +39,7 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
     var view: MainProtocol?
     
     required init(router: RouterProtocol, view: MainProtocol) {
+        
         self.router = router
         self.view = view
     }
@@ -88,7 +89,6 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
                    print("пусто")
                }
            }
-
     }
 }
 

@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import Cosmos
+import SwiftUI
 
 class ProductsScreenVC: UIViewController {
     var buttonSortIsHidden = true
@@ -44,8 +45,8 @@ class ProductsScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        buttonCollectionView.register(UINib(nibName: "ButtonCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ButtonCollectionViewCell")
-        productCollectionView.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductCollectionViewCell")
+        buttonCollectionView.register(UINib(nibName: ButtonCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
+        productCollectionView.register(UINib(nibName: ProductCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
         view.addSubview(tableList)
         
         tableList.delegate = self
@@ -95,58 +96,70 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.productCollectionView {
+        
+        switch collectionView {
+        case productCollectionView:
             return presenter.product?.items?.count ?? 0
-        } else {
+        case buttonCollectionView:
             return buttonCollections.count
+        default:
+            return 0
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.productCollectionView {
-            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as? ProductCollectionViewCell)!
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case productCollectionView:
+            let controller = DetailVCViewController.instantiate()
             let item = presenter.product?.items![indexPath.row]
-            var myString = item?.image ?? ""
-            let ix = myString.startIndex
-            let ix2 = myString.index(ix, offsetBy: 8)
-            let ix3 = myString.index(ix, offsetBy: 16)
-            myString.removeSubrange(ix2...ix3)
-            cell.image.sd_setImage(with: URL(string: myString))
-            cell.nameLabel.text = item?.name
-            cell.blackFRD.text = item?.tag?[0].text ?? ""
-            cell.count.text = item?.statusText
-            let newPrice = "\(item?.prices.new ?? 0)"
-            let oldPrice = "\(item?.prices.old ?? 0)"
+            controller.items = item
+            navigationController?.pushViewController(controller, animated: true)
+        case buttonCollectionView: return
             
-            let attributeString =  NSMutableAttributedString(string: "\(oldPrice) ₽")
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle,
-                                         value: NSUnderlineStyle.single.rawValue,
-                                         range: NSMakeRange(0, attributeString.length))
-            
-            cell.setCosmosView(cell: cell)
-            cell.cosmosView.rating = item?.rating ?? 0.0
-            cell.cosmosView.text = item?.numberOfReviews
-            if item?.isFavorite == true {
-                cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart.fill")
-            } else {
-                cell.buttonFavorite.imageView?.image = UIImage(systemName: "heart")
-            }
-            if item?.prices.new == item?.prices.old {
-                cell.newLabel.text = newPrice + "₽"
-                cell.oldLabel.isHidden = true
-            } else {
-                cell.newLabel.text = newPrice + "₽"
-                cell.oldLabel.attributedText = attributeString
-            }
-            return cell
-        } else {
-            let cellTwo = (collectionView.dequeueReusableCell(withReuseIdentifier: "ButtonCollectionViewCell", for: indexPath) as? ButtonCollectionViewCell)!
-            cellTwo.backgroundColor = .gray
-            let names = buttonCollections[indexPath.row]
-            cellTwo.buttonOutlet.setTitle("\(names)", for: .normal)
-            return cellTwo
+        default:
+            return
         }
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch collectionView {
+        case productCollectionView:
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell)!
+//            let rate = presenter.product?.items?.filter { $0.categoryTitle == "Угловые тканевые диваны" }
+            let item = presenter.product?.items?[indexPath.row]
+            cell.productSetupCell(item: item!, cell: cell)
+            return cell
+        case buttonCollectionView:
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ButtonCollectionViewCell.identifier, for: indexPath) as? ButtonCollectionViewCell)!
+            cell.backgroundColor = .gray
+            let names = buttonCollections[indexPath.row]
+            cell.buttonOutlet.setTitle("\(names)", for: .normal)
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+        
+        
+    }
+    
+//    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if collectionView == self.buttonCollectionView {
+//            switch indexPath.row {
+//            case 0:
+//                presenter.product?.items = []
+//                productCollectionView.reloadData()
+//                presenter.product?.items.map{}
+//            case 1: print("касание есть2")
+//            default: print("касание есть вуафгде")
+//            }
+//        }
+//    }
+//    
+//    
+    
 }
 
 extension ProductsScreenVC: UITableViewDelegate, UITableViewDataSource {
