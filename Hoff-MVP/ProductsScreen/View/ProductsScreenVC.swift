@@ -45,12 +45,19 @@ class ProductsScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(clickedBasket))
         buttonCollectionView.register(UINib(nibName: ButtonCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
         productCollectionView.register(UINib(nibName: ProductCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
         view.addSubview(tableList)
         
         tableList.delegate = self
         tableList.dataSource = self
+    }
+    
+    @objc func clickedBasket() {
+        let controller = BasketViewController.instantiate()
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func pressLeftButton(_ sender: Any) {
@@ -125,18 +132,21 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch collectionView {
+            
         case productCollectionView:
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell)!
 //            let rate = presenter.product?.items?.filter { $0.categoryTitle == "Угловые тканевые диваны" }
             let item = presenter.product?.items?[indexPath.row]
             cell.productSetupCell(item: item!, cell: cell)
             return cell
+            
         case buttonCollectionView:
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ButtonCollectionViewCell.identifier, for: indexPath) as? ButtonCollectionViewCell)!
-            cell.backgroundColor = .gray
+            cell.backgroundColor = .red
             let names = buttonCollections[indexPath.row]
             cell.buttonOutlet.setTitle("\(names)", for: .normal)
             return cell
+            
         default:
             return UICollectionViewCell()
         }

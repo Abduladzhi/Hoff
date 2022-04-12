@@ -14,7 +14,7 @@ class ButtonCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var buttonOutlet: UIButton!
     
     
-    @IBAction func buttonPressFL(_ sender: Any) {
+    @IBAction func buttonPressFL(_ sender: UIButton) {
         
     }
 }
