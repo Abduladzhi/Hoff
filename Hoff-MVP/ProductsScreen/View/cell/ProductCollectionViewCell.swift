@@ -12,6 +12,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: ProductCollectionViewCell.self)
     
+    var items: Items!
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var discountLabel: UILabel!
@@ -31,6 +33,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
   
     
 
+    @IBAction func buttonBasketPress(_ sender: Any) {
+    }
+    
     func setCosmosView(cell: ProductCollectionViewCell) {
         cell.addSubview(cosmosView)
         NSLayoutConstraint.activate([
@@ -41,6 +46,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     func productSetupCell(item: Items, cell: ProductCollectionViewCell) {
+        self.items = item
         setCosmosView(cell: cell)
         cosmosView.rating = item.rating
         cosmosView.text = item.numberOfReviews
@@ -51,7 +57,14 @@ class ProductCollectionViewCell: UICollectionViewCell {
         myString.removeSubrange(ix2...ix3)
         image.sd_setImage(with: URL(string: myString))
         nameLabel.text = item.name
-        blackFRD.text = item.tag?[0].text ?? ""
+        
+        
+        blackFRD.text = item.tag?[0].text
+        
+//        let darkGrey = UIColor(hexString: item.tag?[0].textColor ?? "")
+        blackFRD.textColor = UIColor(hexString: item.tag?[0].bgColor ?? "")
+        
+        
         count.text = item.statusText
         let newPrice = "\(item.prices.new)"
         let oldPrice = "\(item.prices.old)"
@@ -75,7 +88,25 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    
-    
-    
+
+}
+
+extension UIColor {
+    convenience init(hexString: String) {
+        let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt64()
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
 }

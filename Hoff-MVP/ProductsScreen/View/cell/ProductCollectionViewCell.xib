@@ -72,6 +72,14 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIO-IB-CuN">
+                        <rect key="frame" x="7" y="248" width="93" height="31"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="В корзину"/>
+                        <connections>
+                            <action selector="buttonBasketPress:" destination="gTV-IL-0wX" eventType="touchUpInside" id="tfF-hO-Zzz"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -83,6 +91,7 @@
                 <constraint firstItem="7NQ-Dg-vdZ" firstAttribute="top" secondItem="mqs-75-WdB" secondAttribute="bottom" constant="13" id="JDo-zw-a6r"/>
                 <constraint firstItem="ypD-XO-CcN" firstAttribute="top" secondItem="IgC-ep-TcB" secondAttribute="bottom" constant="12" id="JQV-gZ-9t0"/>
                 <constraint firstItem="SNB-GO-OkE" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="6" id="JeN-uI-1dJ"/>
+                <constraint firstItem="aIO-IB-CuN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="LW9-q7-mXw"/>
                 <constraint firstItem="IgC-ep-TcB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="R0H-CS-NPa"/>
                 <constraint firstItem="7NQ-Dg-vdZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="YRC-sL-Thd"/>
                 <constraint firstAttribute="trailing" secondItem="SNB-GO-OkE" secondAttribute="trailing" constant="12" id="b1d-p4-Nhh"/>
@@ -90,6 +99,7 @@
                 <constraint firstItem="ypD-XO-CcN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="hLn-8y-fdn"/>
                 <constraint firstItem="dRU-Z2-5Kh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="lKe-Wx-Tsz"/>
                 <constraint firstItem="mqs-75-WdB" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="6" id="lb5-F8-o52"/>
+                <constraint firstAttribute="bottom" secondItem="aIO-IB-CuN" secondAttribute="bottom" constant="41" id="lre-cN-HnH"/>
                 <constraint firstItem="zLe-xV-IHr" firstAttribute="leading" secondItem="7NQ-Dg-vdZ" secondAttribute="trailing" constant="6" id="m9m-qP-eBG"/>
                 <constraint firstItem="zLe-xV-IHr" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="41" id="mgi-96-Xcp"/>
                 <constraint firstItem="mqs-75-WdB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="zfM-cm-erb"/>

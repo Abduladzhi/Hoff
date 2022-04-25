@@ -16,6 +16,7 @@ protocol RouterMain {
 protocol RouterProtocol: RouterMain {
     func initialViewCotroller() -> UIViewController
     func productScreen()
+//    func detailScreen(item: Items)
 }
 
 class Router: RouterProtocol {
@@ -32,6 +33,11 @@ class Router: RouterProtocol {
         let productViewController = assedlerBuilder.createProductScreen(router: self)
         navController.pushViewController(productViewController, animated: true)
     }
+    
+//    func detailScreen(item: Items) {
+//        let detailViewController = assedlerBuilder.createDetail(router: self, item: item)
+//        navController.pushViewController(detailViewController, animated: true)
+//    }
     
     init(navController: UINavigationController, assedlerBuilder: AssedlerBuilderProtocol) {
         self.navController = navController

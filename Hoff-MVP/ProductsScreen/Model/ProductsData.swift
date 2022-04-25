@@ -19,7 +19,7 @@ struct Items: Decodable {
     var isBestPrice: Bool
     
     var tag: [Tag]?
-    
+    var color: String?
     var isFavorite: Bool
     var articul: String
     var rating: Double
@@ -40,10 +40,6 @@ struct Items: Decodable {
 ////    var complexAsOne:
     var categoryId: String
     var categoryTitle: String
-    
-    
-    
-    
 }
 
 struct Prices: Decodable {

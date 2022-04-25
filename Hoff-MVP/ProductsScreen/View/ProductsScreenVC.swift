@@ -8,9 +8,9 @@
 import UIKit
 import SDWebImage
 import Cosmos
-import SwiftUI
 
 class ProductsScreenVC: UIViewController {
+    
     var buttonSortIsHidden = true
     var presenter: ProductsScreenPresenterProtocol!
     
@@ -25,7 +25,7 @@ class ProductsScreenVC: UIViewController {
     
     let buttons = [ProductSort.cheapFirst.rawValue, ProductSort.dearOnesАirst.rawValue, ProductSort.popular.rawValue, ProductSort.byDiscount.rawValue] as [Any]
     
-    let buttonCollections = [FilderProduct.cornerTkan, FilderProduct.pramieLisher, FilderProduct.cornerLither] as [Any]
+    let buttonCollections = [FilderProduct.cornerTkan.rawValue, FilderProduct.pramieLisher.rawValue, FilderProduct.cornerLither.rawValue] as [Any]
     
     enum ProductSort: String, CaseIterable {
         case cheapFirst = "Сначала дешевые"
@@ -39,6 +39,7 @@ class ProductsScreenVC: UIViewController {
         case cornerLither = "Угловые кожанные"
     }
     
+    
     @IBOutlet weak var buttonCollectionView: UICollectionView!
     
     @IBOutlet weak var productCollectionView: UICollectionView!
@@ -46,9 +47,11 @@ class ProductsScreenVC: UIViewController {
         super.viewDidLoad()
         presenter.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(clickedBasket))
-        buttonCollectionView.register(UINib(nibName: ButtonCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ButtonCollectionViewCell.identifier)
+        buttonCollectionView.register(UINib(nibName: "ButtonsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ButtonsCollectionViewCell")
         productCollectionView.register(UINib(nibName: ProductCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
         view.addSubview(tableList)
+        
+        
         
         tableList.delegate = self
         tableList.dataSource = self
@@ -56,7 +59,7 @@ class ProductsScreenVC: UIViewController {
     
     @objc func clickedBasket() {
         let controller = BasketViewController.instantiate()
-        
+//        controller.item =
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -117,11 +120,29 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case productCollectionView:
-            let controller = DetailVCViewController.instantiate()
-            let item = presenter.product?.items![indexPath.row]
-            controller.items = item
+            let controller = DetailNewVCViewController.instantiate()
+            controller.items = presenter.product?.items?[indexPath.row]
+            controller.itemsTwo = presenter.product?.items?[indexPath.row].images
             navigationController?.pushViewController(controller, animated: true)
-        case buttonCollectionView: return
+        case buttonCollectionView:
+            print(indexPath)
+            switch indexPath  {
+            case [0, 0]:
+                presenter.product?.items = []
+                productCollectionView.reloadData()
+                presenter.getProduct(categoryId: "634", sortBy: nil, sortType: nil, limit: nil, offset: nil)
+            case [0, 1]:
+                presenter.product?.items = []
+                productCollectionView.reloadData()
+                presenter.getProduct(categoryId: "638", sortBy: nil, sortType: nil, limit: nil, offset: nil)
+            case [0, 2]:
+                presenter.product?.items = []
+                productCollectionView.reloadData()
+                presenter.getProduct(categoryId: "631", sortBy: nil, sortType: nil, limit: nil, offset: nil)
+            default:
+                return
+            }
+
             
         default:
             return
@@ -135,16 +156,17 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
             
         case productCollectionView:
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.identifier, for: indexPath) as? ProductCollectionViewCell)!
-//            let rate = presenter.product?.items?.filter { $0.categoryTitle == "Угловые тканевые диваны" }
             let item = presenter.product?.items?[indexPath.row]
             cell.productSetupCell(item: item!, cell: cell)
             return cell
             
         case buttonCollectionView:
-            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: ButtonCollectionViewCell.identifier, for: indexPath) as? ButtonCollectionViewCell)!
-            cell.backgroundColor = .red
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ButtonsCollectionViewCell", for: indexPath) as! ButtonsCollectionViewCell
             let names = buttonCollections[indexPath.row]
-            cell.buttonOutlet.setTitle("\(names)", for: .normal)
+            cell.newLabel.text = String("\(names)")
+            
+//            cell.labelButton.textColor = .red
+//            cell.backgroundColor = .blue
             return cell
             
         default:
@@ -154,21 +176,8 @@ extension ProductsScreenVC: UICollectionViewDelegate, UICollectionViewDataSource
         
     }
     
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == self.buttonCollectionView {
-//            switch indexPath.row {
-//            case 0:
-//                presenter.product?.items = []
-//                productCollectionView.reloadData()
-//                presenter.product?.items.map{}
-//            case 1: print("касание есть2")
-//            default: print("касание есть вуафгде")
-//            }
-//        }
-//    }
-//    
-//    
+    
+    
     
 }
 

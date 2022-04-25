@@ -11,6 +11,7 @@ import UIKit
 protocol AssedlerBuilderProtocol {
     func createMainScreeb(router: RouterProtocol) -> UIViewController
     func createProductScreen(router: RouterProtocol) -> UIViewController
+//    func createDetail(router: RouterProtocol, item: Items) -> UIViewController
 }
 
 class AssedlerScreenBuilder: AssedlerBuilderProtocol {
@@ -27,6 +28,12 @@ class AssedlerScreenBuilder: AssedlerBuilderProtocol {
         view.presenter = presenter
         return view
     }
+//    func createDetail(router: RouterProtocol, item: Items) -> UIViewController {
+//        let view = DetailVCViewController()
+//        let presenterDetail = DetailScreenPresenter(router: router, item: item)
+//        view.presenter = presenterDetail
+//        return view
+//    }
     
     
 }

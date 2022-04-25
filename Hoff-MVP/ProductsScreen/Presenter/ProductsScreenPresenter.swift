@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ProgressHUD
 
 protocol MainProtocol {
     func success()
@@ -18,10 +19,15 @@ protocol ProductsScreenPresenterProtocol: AnyObject {
     func viewDidLoad()
     func getProduct(categoryId: String?, sortBy: String?, sortType: String?, limit: String?, offset: String?)
     func paginationActive()
+//    func showDetail(item: Items)
+    
 }
 
 class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
+    
     func viewDidLoad() {
+        ProgressHUD.animationType = .circleStrokeSpin
+        ProgressHUD.show()
         getProduct(categoryId: nil, sortBy: nil, sortType: nil, limit: nil, offset: nil)
     }
     
@@ -33,6 +39,9 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
         
     }
 
+//    func showDetail(item: Items) {
+//        router.detailScreen(item: item)
+//    }
     
     var product: Data?
     var router: RouterProtocol
@@ -69,18 +78,22 @@ class ProductsScreenPresenter: ProductsScreenPresenterProtocol {
            }
            
        
-           
+        
            NetworkService.shared.getTheFood(categoryId: categoryId, sortBy: sortBy, sortType: sortType, limit: limit, offset: offset) { response in
                if (response != nil) {
                    if self.changesToTheRequest == true && self.product == nil {
                        self.product = response
+                       
                    }
                    if self.product == nil {
                        self.product = response
+                       ProgressHUD.dismiss()
                    } else if self.changesToTheRequest == false {
                        self.product!.items = self.product!.items! + response!.items!
+                       
                    } else {
                        self.product = response
+                       
                    }
                    self.view?.success()
                    print("ne пусто")

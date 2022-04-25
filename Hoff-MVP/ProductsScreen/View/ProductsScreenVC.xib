@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductsScreenVC" customModule="Hoff_MVP" customModuleProvider="target">
             <connections>
-                <outlet property="buttonCollectionView" destination="1XI-dy-tBj" id="C15-p0-z6L"/>
+                <outlet property="buttonCollectionView" destination="Szs-vV-T5G" id="Lae-qg-kOs"/>
                 <outlet property="productCollectionView" destination="SSi-0R-t2G" id="ELW-MZ-yL5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,53 +23,60 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9g-ML-8oW">
                     <rect key="frame" x="0.0" y="44" width="414" height="81"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xme-G5-Z4V">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="31"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpT-kl-YZ2">
-                                    <rect key="frame" x="0.0" y="0.0" width="207" height="31"/>
-                                    <color key="tintColor" systemColor="labelColor"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="doc.badge.gearshape" catalog="system" title="По популярности"/>
-                                    <connections>
-                                        <action selector="pressLeftButton:" destination="-1" eventType="touchUpInside" id="FeK-Fl-vGf"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="NOP-F4-BpN">
-                                    <rect key="frame" x="207" y="0.0" width="207" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="tintColor" systemColor="labelColor"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="lock.square.stack.fill" catalog="system" title="Фильтры"/>
-                                </button>
-                            </subviews>
-                        </stackView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1XI-dy-tBj">
-                            <rect key="frame" x="0.0" y="31" width="414" height="50"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dpT-kl-YZ2">
+                            <rect key="frame" x="0.0" y="0.0" width="190" height="31"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="190" id="SaT-yl-Fje"/>
+                            </constraints>
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="doc.badge.gearshape" catalog="system" title="По популярности"/>
+                            <connections>
+                                <action selector="pressLeftButton:" destination="-1" eventType="touchUpInside" id="FeK-Fl-vGf"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="NOP-F4-BpN">
+                            <rect key="frame" x="284" y="0.0" width="130" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="lock.square.stack.fill" catalog="system" title="Фильтры"/>
+                        </button>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Szs-vV-T5G">
+                            <rect key="frame" x="0.0" y="38" width="414" height="43"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7B9-Jy-P2J">
-                                <size key="itemSize" width="128" height="128"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mXC-h6-0gU">
+                                <size key="itemSize" width="200" height="30"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="hHk-P4-1jJ"/>
-                                <outlet property="delegate" destination="-1" id="P7M-m9-EBX"/>
+                                <outlet property="dataSource" destination="-1" id="5Cy-R4-ki5"/>
+                                <outlet property="delegate" destination="-1" id="kvS-6H-Dw3"/>
                             </connections>
                         </collectionView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="xme-G5-Z4V" secondAttribute="trailing" id="5hN-bW-qCi"/>
-                        <constraint firstItem="xme-G5-Z4V" firstAttribute="leading" secondItem="T9g-ML-8oW" secondAttribute="leading" id="uBE-10-iCz"/>
-                        <constraint firstItem="xme-G5-Z4V" firstAttribute="top" secondItem="T9g-ML-8oW" secondAttribute="top" id="ulT-T5-WIr"/>
-                        <constraint firstAttribute="height" constant="81" id="x7I-Rf-bJl"/>
+                        <constraint firstItem="dpT-kl-YZ2" firstAttribute="baseline" secondItem="NOP-F4-BpN" secondAttribute="firstBaseline" id="244-kX-eIZ"/>
+                        <constraint firstItem="Szs-vV-T5G" firstAttribute="leading" secondItem="dpT-kl-YZ2" secondAttribute="leading" id="BDk-LX-1q1"/>
+                        <constraint firstItem="Szs-vV-T5G" firstAttribute="top" secondItem="T9g-ML-8oW" secondAttribute="top" constant="38" id="CV5-U0-4VE"/>
+                        <constraint firstItem="dpT-kl-YZ2" firstAttribute="top" secondItem="T9g-ML-8oW" secondAttribute="top" id="FfO-hZ-2ey"/>
+                        <constraint firstItem="Szs-vV-T5G" firstAttribute="leading" secondItem="T9g-ML-8oW" secondAttribute="leading" id="Jqb-Fp-0A4"/>
+                        <constraint firstItem="NOP-F4-BpN" firstAttribute="leading" secondItem="dpT-kl-YZ2" secondAttribute="trailing" constant="94" id="QoC-eS-xe8"/>
+                        <constraint firstItem="dpT-kl-YZ2" firstAttribute="baseline" secondItem="NOP-F4-BpN" secondAttribute="baseline" id="RCH-HF-kMe"/>
+                        <constraint firstAttribute="width" constant="414" id="WyW-hj-caO"/>
+                        <constraint firstAttribute="height" constant="81" id="duA-0p-Dp8"/>
+                        <constraint firstAttribute="bottom" secondItem="Szs-vV-T5G" secondAttribute="bottom" id="eiR-xp-R8Y"/>
+                        <constraint firstAttribute="trailing" secondItem="Szs-vV-T5G" secondAttribute="trailing" id="fCh-Qk-EEQ"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SSi-0R-t2G">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SSi-0R-t2G">
                     <rect key="frame" x="0.0" y="125" width="414" height="771"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="771" id="hl7-LK-ktv"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zOW-Af-yQR">
                         <size key="itemSize" width="170" height="320"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>

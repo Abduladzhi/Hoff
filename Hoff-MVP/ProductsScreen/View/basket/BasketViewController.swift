@@ -11,9 +11,12 @@ class BasketViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var basket: [Items]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Корзина"
+//        tableView.backgroundColor = .red
         registerCells()
     }
     
@@ -24,11 +27,14 @@ class BasketViewController: UIViewController {
 
 extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasketTableViewCell.identifier) as! BasketTableViewCell
+//        let items = item[indexPath.row]
+//        cell.setup(items: items)
+        cell.titleLabel.text = "111"
         return cell
     }
     
