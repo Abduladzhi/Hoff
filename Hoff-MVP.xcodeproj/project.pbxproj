@@ -42,6 +42,9 @@
 		986FD6B02800F00D00EE5711 /* Cosmos in Frameworks */ = {isa = PBXBuildFile; productRef = 986FD6AF2800F00D00EE5711 /* Cosmos */; };
 		98AC8EE3280DCBAE00C5C730 /* ButtonsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8EE1280DCBAE00C5C730 /* ButtonsCollectionViewCell.swift */; };
 		98AC8EE4280DCBAE00C5C730 /* ButtonsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8EE2280DCBAE00C5C730 /* ButtonsCollectionViewCell.xib */; };
+		98AC8FF528171EE500C5C730 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AC8FF328171EE500C5C730 /* ImageCollectionViewCell.swift */; };
+		98AC8FF628171EE500C5C730 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AC8FF428171EE500C5C730 /* ImageCollectionViewCell.xib */; };
+		98AC8FF9281728D800C5C730 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 98AC8FF8281728D800C5C730 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +79,8 @@
 		986D7AA528074FA3008A30BB /* ImageCellCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		98AC8EE1280DCBAE00C5C730 /* ButtonsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCollectionViewCell.swift; sourceTree = "<group>"; };
 		98AC8EE2280DCBAE00C5C730 /* ButtonsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsCollectionViewCell.xib; sourceTree = "<group>"; };
+		98AC8FF328171EE500C5C730 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		98AC8FF428171EE500C5C730 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +90,7 @@
 			files = (
 				98367B632808F541005BCEB3 /* RealmSwift in Frameworks */,
 				986FD6B02800F00D00EE5711 /* Cosmos in Frameworks */,
+				98AC8FF9281728D800C5C730 /* Kingfisher in Frameworks */,
 				986D7AA228071887008A30BB /* ProgressHUD in Frameworks */,
 				9801B99327FE30E700C84C61 /* SDWebImage in Frameworks */,
 				9801B99027FE30A300C84C61 /* Alamofire in Frameworks */,
@@ -237,6 +243,7 @@
 		984AEDA428056D24003A09EE /* Basket */ = {
 			isa = PBXGroup;
 			children = (
+				98AC8FF228171EC800C5C730 /* Image */,
 				984AEDA528056D3C003A09EE /* BasketTableViewCell.swift */,
 				984AEDA628056D3C003A09EE /* BasketTableViewCell.xib */,
 			);
@@ -268,6 +275,15 @@
 			path = ButtonCollectionCell;
 			sourceTree = "<group>";
 		};
+		98AC8FF228171EC800C5C730 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				98AC8FF328171EE500C5C730 /* ImageCollectionViewCell.swift */,
+				98AC8FF428171EE500C5C730 /* ImageCollectionViewCell.xib */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +307,7 @@
 				986D7AA128071887008A30BB /* ProgressHUD */,
 				98367B602808F541005BCEB3 /* Realm */,
 				98367B622808F541005BCEB3 /* RealmSwift */,
+				98AC8FF8281728D800C5C730 /* Kingfisher */,
 			);
 			productName = "Hoff-MVP";
 			productReference = 9801B95A27FE176900C84C61 /* Hoff-MVP.app */;
@@ -326,6 +343,7 @@
 				986FD6AE2800F00D00EE5711 /* XCRemoteSwiftPackageReference "Cosmos" */,
 				986D7AA028071887008A30BB /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				98367B5F2808F541005BCEB3 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				98AC8FF7281728D800C5C730 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 9801B95B27FE176900C84C61 /* Products */;
 			projectDirPath = "";
@@ -348,6 +366,7 @@
 				98AC8EE4280DCBAE00C5C730 /* ButtonsCollectionViewCell.xib in Resources */,
 				984AEDA828056D3C003A09EE /* BasketTableViewCell.xib in Resources */,
 				9801B96527FE176900C84C61 /* Main.storyboard in Resources */,
+				98AC8FF628171EE500C5C730 /* ImageCollectionViewCell.xib in Resources */,
 				9801B97D27FE182500C84C61 /* MainScreenVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +390,7 @@
 				984AED9E280552C5003A09EE /* UIView+Extensions.swift in Sources */,
 				984AEDB72805E37D003A09EE /* DetailScreenPresenter.swift in Sources */,
 				986D7AA628074FA3008A30BB /* ImageCellCollectionViewCell.swift in Sources */,
+				98AC8FF528171EE500C5C730 /* ImageCollectionViewCell.swift in Sources */,
 				9801B99627FE313100C84C61 /* Network.swift in Sources */,
 				9801B98727FE199000C84C61 /* Router.swift in Sources */,
 				9801B98427FE18E800C84C61 /* ProductsScreenVC.swift in Sources */,
@@ -641,6 +661,14 @@
 				kind = branch;
 			};
 		};
+		98AC8FF7281728D800C5C730 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -673,6 +701,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 986FD6AE2800F00D00EE5711 /* XCRemoteSwiftPackageReference "Cosmos" */;
 			productName = Cosmos;
+		};
+		98AC8FF8281728D800C5C730 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98AC8FF7281728D800C5C730 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

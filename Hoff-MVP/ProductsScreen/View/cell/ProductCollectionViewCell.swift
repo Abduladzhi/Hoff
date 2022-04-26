@@ -7,12 +7,15 @@
 
 import UIKit
 import Cosmos
+import Kingfisher
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = String(describing: ProductCollectionViewCell.self)
-    
+    var itemsTwo: [String]!
     var items: Items!
+    
+    @IBOutlet weak var collectionViewImage: UICollectionView!
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -30,9 +33,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         cosmos.translatesAutoresizingMaskIntoConstraints = false
         return cosmos
     }()
-  
     
 
+    
     @IBAction func buttonBasketPress(_ sender: Any) {
     }
     
@@ -47,6 +50,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     func productSetupCell(item: Items, cell: ProductCollectionViewCell) {
         self.items = item
+        
+        collectionViewImage.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
         setCosmosView(cell: cell)
         cosmosView.rating = item.rating
         cosmosView.text = item.numberOfReviews
@@ -55,8 +60,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
         let ix2 = myString.index(ix, offsetBy: 8)
         let ix3 = myString.index(ix, offsetBy: 16)
         myString.removeSubrange(ix2...ix3)
-        image.sd_setImage(with: URL(string: myString))
+//        image.sd_setImage(with: URL(string: myString))
         nameLabel.text = item.name
+        
         
         
         blackFRD.text = item.tag?[0].text
@@ -88,7 +94,31 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
     }
 
+}
 
+
+extension ProductCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return items.images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.identifier, for: indexPath) as! ImageCollectionViewCell
+        
+        var myString = items.images[indexPath.row]
+        let ix = myString.startIndex
+        let ix2 = myString.index(ix, offsetBy: 8)
+        let ix3 = myString.index(ix, offsetBy: 16)
+        myString.removeSubrange(ix2...ix3)
+//        imageVC.sd_setImage(with: URL(string: myString))
+//        print(myString)
+//        cell.imageCollection.sd_setImage(with: URL(string: myString))
+        cell.imageCollection.kf.setImage(with: URL(string: myString))
+        
+        return cell
+    }
+    
+    
 }
 
 extension UIColor {

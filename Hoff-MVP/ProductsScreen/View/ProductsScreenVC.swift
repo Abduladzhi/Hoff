@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import Cosmos
+import Kingfisher
 
 class ProductsScreenVC: UIViewController {
     
@@ -45,6 +46,7 @@ class ProductsScreenVC: UIViewController {
     @IBOutlet weak var productCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "cart"), style: .plain, target: self, action: #selector(clickedBasket))
         buttonCollectionView.register(UINib(nibName: "ButtonsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ButtonsCollectionViewCell")

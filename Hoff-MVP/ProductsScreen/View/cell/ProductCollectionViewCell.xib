@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,13 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="170" height="320"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dRU-Z2-5Kh">
-                        <rect key="frame" x="2" y="2" width="166" height="111"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="166" id="T6t-WG-dI4"/>
-                            <constraint firstAttribute="height" constant="111" id="j15-YP-h5G"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="discount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqs-75-WdB">
                         <rect key="frame" x="12" y="119" width="49" height="22"/>
                         <constraints>
@@ -80,37 +74,55 @@
                             <action selector="buttonBasketPress:" destination="gTV-IL-0wX" eventType="touchUpInside" id="tfF-hO-Zzz"/>
                         </connections>
                     </button>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9PZ-Ea-x0v">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="119"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="170" id="KgZ-1w-UZj"/>
+                            <constraint firstAttribute="height" constant="119" id="nVn-Xe-sfj"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5BB-cw-MZF">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="gTV-IL-0wX" id="ctE-rY-6tP"/>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="MUt-MG-npc"/>
+                        </connections>
+                    </collectionView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="SNB-GO-OkE" firstAttribute="top" secondItem="mqs-75-WdB" secondAttribute="top" id="0LD-qD-IAm"/>
+                <constraint firstItem="9PZ-Ea-x0v" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="0pp-to-KLH"/>
+                <constraint firstItem="zLe-xV-IHr" firstAttribute="top" secondItem="9PZ-Ea-x0v" secondAttribute="bottom" constant="35" id="2al-cx-GG5"/>
+                <constraint firstAttribute="trailing" secondItem="9PZ-Ea-x0v" secondAttribute="trailing" id="7Ij-bc-5bI"/>
                 <constraint firstItem="IgC-ep-TcB" firstAttribute="top" secondItem="Xdc-HN-vrR" secondAttribute="bottom" constant="6" id="86J-g3-W3k"/>
                 <constraint firstItem="Xdc-HN-vrR" firstAttribute="top" secondItem="7NQ-Dg-vdZ" secondAttribute="bottom" constant="6" id="92L-qy-evA"/>
-                <constraint firstAttribute="trailing" secondItem="dRU-Z2-5Kh" secondAttribute="trailing" constant="2" id="AMj-cC-Uvx"/>
+                <constraint firstItem="zLe-xV-IHr" firstAttribute="baseline" secondItem="7NQ-Dg-vdZ" secondAttribute="baseline" id="9KV-uC-Ptj"/>
                 <constraint firstItem="Xdc-HN-vrR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="EWI-mX-PVl"/>
                 <constraint firstItem="7NQ-Dg-vdZ" firstAttribute="top" secondItem="mqs-75-WdB" secondAttribute="bottom" constant="13" id="JDo-zw-a6r"/>
                 <constraint firstItem="ypD-XO-CcN" firstAttribute="top" secondItem="IgC-ep-TcB" secondAttribute="bottom" constant="12" id="JQV-gZ-9t0"/>
-                <constraint firstItem="SNB-GO-OkE" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="6" id="JeN-uI-1dJ"/>
                 <constraint firstItem="aIO-IB-CuN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="7" id="LW9-q7-mXw"/>
                 <constraint firstItem="IgC-ep-TcB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="R0H-CS-NPa"/>
                 <constraint firstItem="7NQ-Dg-vdZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="YRC-sL-Thd"/>
                 <constraint firstAttribute="trailing" secondItem="SNB-GO-OkE" secondAttribute="trailing" constant="12" id="b1d-p4-Nhh"/>
-                <constraint firstItem="dRU-Z2-5Kh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="e3P-jO-sXR"/>
                 <constraint firstItem="ypD-XO-CcN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="hLn-8y-fdn"/>
-                <constraint firstItem="dRU-Z2-5Kh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="lKe-Wx-Tsz"/>
-                <constraint firstItem="mqs-75-WdB" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="6" id="lb5-F8-o52"/>
+                <constraint firstItem="9PZ-Ea-x0v" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="iC1-dL-Qt9"/>
                 <constraint firstAttribute="bottom" secondItem="aIO-IB-CuN" secondAttribute="bottom" constant="41" id="lre-cN-HnH"/>
                 <constraint firstItem="zLe-xV-IHr" firstAttribute="leading" secondItem="7NQ-Dg-vdZ" secondAttribute="trailing" constant="6" id="m9m-qP-eBG"/>
-                <constraint firstItem="zLe-xV-IHr" firstAttribute="top" secondItem="dRU-Z2-5Kh" secondAttribute="bottom" constant="41" id="mgi-96-Xcp"/>
                 <constraint firstItem="mqs-75-WdB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="zfM-cm-erb"/>
             </constraints>
             <size key="customSize" width="212" height="295"/>
             <connections>
                 <outlet property="blackFRD" destination="Xdc-HN-vrR" id="iox-5K-Xzh"/>
                 <outlet property="buttonFavorite" destination="SNB-GO-OkE" id="aEv-nC-6pv"/>
+                <outlet property="collectionViewImage" destination="9PZ-Ea-x0v" id="g5n-UD-SKs"/>
                 <outlet property="count" destination="ypD-XO-CcN" id="q47-QW-hYM"/>
                 <outlet property="discountLabel" destination="mqs-75-WdB" id="5fr-bM-2KQ"/>
-                <outlet property="image" destination="dRU-Z2-5Kh" id="mWY-sQ-8FX"/>
                 <outlet property="nameLabel" destination="IgC-ep-TcB" id="8yH-eB-APc"/>
                 <outlet property="newLabel" destination="7NQ-Dg-vdZ" id="3JQ-0e-lPb"/>
                 <outlet property="oldLabel" destination="zLe-xV-IHr" id="EGd-lR-Idt"/>
@@ -120,5 +132,8 @@
     </objects>
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
